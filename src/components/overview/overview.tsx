@@ -7,6 +7,7 @@ import './overview.css'
 export interface propsTypes {
     brandsList?: [string],
     brandsCategory?: string,
+    brandDescription?: string,
 }
 
 const Overview = (props: propsTypes) => {
@@ -22,28 +23,7 @@ const Overview = (props: propsTypes) => {
            <Media 
             query="(min-width: 700px)"
             render={() => {
-                    if (props.brandsList === undefined) {
-                        return (
-                            <div className="overview_descriptionWrap">
-                                <div
-                                    className="overview_descriptionHeader montserrat_regular"
-                                >Оплата и доставка</div>
-                                <div
-                                    className="overview_descriptionText montserrat_regular"
-                                >
-                                    Эта книга адресована всем, кто изучает русский язык. 
-                                    Но состоит она не из правил, упражнений и учебных
-                                    текстов. Для этого созданы другие замечательные
-                                    учебники.
-
-                                    У этой книги совсем иная задача. Она поможет вам
-                                    научиться не только разговаривать, но и размышлять
-                                    по-русски.
-
-                                </div>
-                            </div>
-                        )
-                    } else {
+                    if (props.brandsList) {
                         return (
                             <div
                                 css={css`
@@ -74,6 +54,39 @@ const Overview = (props: propsTypes) => {
                                         >{brand}</Link>
                                     )
                                 })}
+                            </div>
+                        )
+                    } else if (props.brandDescription) {
+                        return (
+                            <div className="overview_descriptionWrap">
+                                <div
+                                    className="overview_descriptionHeader montserrat_regular"
+                            >{props.brandDescription}</div>
+                                <div
+                                    className="overview_descriptionText montserrat_regular"
+                                >
+                                </div>
+                            </div>
+                        )
+                    } else {
+                        return (
+                            <div className="overview_descriptionWrap">
+                                <div
+                                    className="overview_descriptionHeader montserrat_regular"
+                                >Оплата и доставка</div>
+                                <div
+                                    className="overview_descriptionText montserrat_regular"
+                                >
+                                    Эта книга адресована всем, кто изучает русский язык. 
+                                    Но состоит она не из правил, упражнений и учебных
+                                    текстов. Для этого созданы другие замечательные
+                                    учебники.
+
+                                    У этой книги совсем иная задача. Она поможет вам
+                                    научиться не только разговаривать, но и размышлять
+                                    по-русски.
+
+                                </div>
                             </div>
                         )
                     }

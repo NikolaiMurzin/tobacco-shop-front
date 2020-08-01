@@ -59,11 +59,11 @@ const TobaccoMainPage = (props) => {
                 brandsCategory="tobacco"
                 />
             {props.pageContext.tobaccosOfEachBrands.map(tobaccosOfBrand => {
-                console.log(tobaccosOfBrand)
                 return (
                     <ProductLine
                         header={tobaccosOfBrand.brand}
                         products={tobaccosOfBrand.products}
+                        addCss={"margin-top: 80px;"}
                         />
                 )
             })}

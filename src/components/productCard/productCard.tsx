@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
+import { navigate } from 'gatsby'
 
 export interface propTypes {
     imageSrc: string,
@@ -8,88 +9,98 @@ export interface propTypes {
     name: string,
     price: string,
     weights: [string],
+    pathName: string,
 }
 const ProductCard = (props: propTypes) => {
-    const { imageSrc, brand, name, price, weights } = props
+    const { imageSrc, brand, name, price, weights, pathName } = props
     return (
-        <div>
-                                <div css={css`
-                                    display: flex;
-                                    justify-content: left;
-                                    height: 108px;
-                                    width: 107px;
-                                    margin-bottom: 5px;
-                                `}>
-                                    <LazyLoadImage
-                                        src={imageSrc} 
-                                        effect='opacity'
-                                        css={css`
-                                            max-height: 108px;
-                                            max-width: 107px;
-                                            width: auto;
-                                            height: auto;
-                                        `}
-                                        wrapperProps={{
-                                            style: {
-                                                display: 'flex',
-                                                alignItems: "center",
-                                            }
-                                        }}
-                                    />
-                                </div>
-                                <div
-                                    className='montserrat_regular'
-                                    css={css`
-                                        font-size: 14px;
-                                        margin-bottom: 2px;
-                                        color: white;
-                                        max-height: 16px;
-                                        overflow-y: hidden;
-                                    `}
+        <div 
+            css={css`
+            &:hover {
+                cursor: pointer
+            }
+        `}>
+                                <div 
+                                    onClick={() => {navigate(pathName)}}
                                 >
-                                    {brand}
-                                </div>
-                                <div 
-                                    className='montserrat_regular'
-                                    css={css`
-                                        font-size: 14px;
-                                        margin-bottom: 2px;
-                                        color: white;
-                                        max-height: 16px;
-                                        overflow-y: hidden;
-                                    `}
-                                >{name}</div>
-
-                                <div
-                                    className="montserrat_bold" 
-                                    css={css`
-                                        font-size: 14px;
-                                        margin-bottom: 2px;
-                                        color: white;
-                                        max-height: 16px;
-                                        overflow-y: hidden;
-                                    `}
-                                >{price} руб.</div>
-
-                                <div 
-                                    css={css`
-                                        
-                                    `}
-                                >{weights.map((weight, index) => {
-                                    return <div
-                                            key={index}
-                                            className="montserrat_regular" 
+                                    <div css={css`
+                                        display: flex;
+                                        justify-content: left;
+                                        height: 108px;
+                                        width: 107px;
+                                        margin-bottom: 5px;
+                                    `}>
+                                        <LazyLoadImage
+                                            src={imageSrc} 
+                                            effect='opacity'
                                             css={css`
-                                                font-size: 12px;
-                                                color: white;
-                                                max-height: 16px;
-                                                overflow-y: hidden;
+                                                max-height: 108px;
+                                                max-width: 107px;
+                                                width: auto;
+                                                height: auto;
                                             `}
-                                    >{weight} гр.</div>
-                                })}
-                                </div>
+                                            wrapperProps={{
+                                                style: {
+                                                    display: 'flex',
+                                                    alignItems: "center",
+                                                }
+                                            }}
+                                        />
+                                    </div>
+                                    <div
+                                        className='montserrat_regular'
+                                        css={css`
+                                            font-size: 14px;
+                                            margin-bottom: 2px;
+                                            color: white;
+                                            max-height: 16px;
+                                            overflow-y: hidden;
+                                        `}
+                                    >
+                                        {brand}
+                                    </div>
+                                    <div 
+                                        className='montserrat_regular'
+                                        css={css`
+                                            font-size: 14px;
+                                            margin-bottom: 2px;
+                                            color: white;
+                                            max-height: 16px;
+                                            overflow-y: hidden;
+                                        `}
+                                    >{name}</div>
 
+                                    <div
+                                        className="montserrat_bold" 
+                                        css={css`
+                                            font-size: 14px;
+                                            margin-bottom: 2px;
+                                            color: white;
+                                            max-height: 16px;
+                                            overflow-y: hidden;
+                                        `}
+                                    >{price} руб.</div>
+
+                                    <div 
+                                        css={css`
+                                            
+                                        `}
+                                    >{weights.map((weight, index) => {
+                                        return <div
+                                                key={index}
+                                                className="montserrat_regular" 
+                                                css={css`
+                                                    font-size: 12px;
+                                                    color: white;
+                                                    max-height: 16px;
+                                                    overflow-y: hidden;
+                                                `}
+                                        >{weight} гр.</div>
+                                    })}
+                                    </div>
+                                </div>
                                 <div
+                                    onClick={() => {console.log('add product clicked')}}
                                     css={css`
                                         width: 106px;
                                         height: 26px;

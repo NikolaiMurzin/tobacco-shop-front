@@ -3,6 +3,7 @@ import { jsx, css } from '@emotion/core'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import ScrollContainer from 'react-indiana-drag-scroll'
 import ProductCard from '../productCard/productCard'
+import getPathNameOfProduct from '../../../helpers/getPathNameOfProduct'
 
 
 export interface propTypes {
@@ -14,6 +15,7 @@ export interface product{
     id: string
     name: string
     price: string
+    slug: string
     attributes: [productAttribute]
     categories: [productCattegorie]
     images: [productImage]
@@ -73,6 +75,7 @@ const productLine = (props: propTypes) => {
                         }
                         let name = product.name
                         let price = product.price
+                        let pathName = getPathNameOfProduct(product)
                         return (
                             <div 
                                 key={index}
@@ -86,6 +89,7 @@ const productLine = (props: propTypes) => {
                                     name = {name}
                                     price = {price}
                                     weights = {weights}
+                                    pathName = {pathName}
                                 />
                             </div>
                         )

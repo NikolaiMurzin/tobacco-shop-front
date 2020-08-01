@@ -21,7 +21,8 @@ module.exports = async ({ graphql, actions }) => {
       path: pathName,
       component: path.resolve('./src/templates/tobaccoBrandPage.tsx'),
       context: {
-        tobaccos
+        brandName,
+        tobaccos,
       }
     })
   })

@@ -20,6 +20,7 @@ const IndexPage = () => {
               id
               name
               price
+              slug
               attributes {
                 options
                 name
