@@ -55,12 +55,11 @@ const productLine = (props: propTypes) => {
             >
                     {props.products.map((product, index) => {
                         let imageSrc 
-                        if (product.node.images[0]) {
-                            console.log(product)
-                            imageSrc = product.node.images[0].localFile.childImageSharp.resize.src
+                        if (product.images[0]) {
+                            imageSrc = product.images[0].localFile.childImageSharp.resize.src
                         }
                         let weights: [string] = ['']
-                        let weightAttributes = product.node.attributes.filter((attr) => {
+                        let weightAttributes = product.attributes.filter((attr) => {
                                 return attr.name === 'weight'
                                 })
                         if (weightAttributes.length != 0) {
@@ -68,12 +67,12 @@ const productLine = (props: propTypes) => {
                         }
 
                         let brandName
-                        let  brandAttribute = product.node.attributes.filter(attr => attr.name.includes('Brand'))
+                        let  brandAttribute = product.attributes.filter(attr => attr.name.includes('Brand'))
                         if (brandAttribute.length != 0) {
                             brandName = brandAttribute[0].options[0].toLowerCase()
                         }
-                        let name = product.node.name
-                        let price = product.node.price
+                        let name = product.name
+                        let price = product.price
                         return (
                             <div 
                                 key={index}

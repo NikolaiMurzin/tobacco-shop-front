@@ -9,7 +9,6 @@ module.exports = (productsQuery, productsBrandsQuery) => {
         // get tobaccos of this brand
         const getProductsOfBrand = require('./getProductsOfBrand')
         const products = getProductsOfBrand(productsQuery, brandName)
-
         productWithBrands.push({ brand: option.name,  products })
     })
 

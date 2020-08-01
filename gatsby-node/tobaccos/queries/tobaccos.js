@@ -1,4 +1,3 @@
-const { graphql } = require("gatsby");
 
 module.exports = async (graphql) => {
 
@@ -19,6 +18,15 @@ module.exports = async (graphql) => {
                 }
                 images{
                   src
+                  localFile {
+                    childImageSharp {
+                      resize(width: 200, height: 200, jpegQuality: 10) {
+                        src
+                        height
+                        width
+                      }
+                      }
+                  }
                 }
               }
           }

@@ -11,13 +11,12 @@ import Search from './../components/search/search'
 import Overview from './../components/overview/overview'
 import ProductLine from './../components/productLine/productLine'
 
-const IndexPage = (props) => {
+const IndexPage = () => {
   const [mobileMenuOpen, toggleMobileMenu] = useState(false)
   const productsQuery = useStaticQuery(graphql`
       query MyQuery {
         allWcProducts(filter: {}) {
-          edges {
-            node {
+          nodes {
               id
               name
               price
@@ -41,13 +40,13 @@ const IndexPage = (props) => {
                 }
               }
             }
-          }
+          
         }
-      }
+}
   `)
 
-  let products = productsQuery.allWcProducts.edges
-  let tobaccos = products.filter((product) => product.node.categories[0].name === "tobacco")
+  let nodes = productsQuery.allWcProducts.nodes
+  let tobaccos = nodes.filter((node) => node.categories[0].name === "tobacco")
   tobaccos = tobaccos.slice(1, 19)
   return(
     <MainLayout>
