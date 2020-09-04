@@ -1,12 +1,11 @@
-/** @jsx jsx */
-import { jsx, css } from '@emotion/core'
+import React from 'react'
 import { useState, useEffect } from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 
-import MainLayout from "../components/mainLayout"
+import MainLayout from "../components/mainLayout/mainLayout"
 import Header from "../components/header/header"
 import Media from "react-media"
-import MobileMenu from "./../components/mobileMenu"
+import MobileMenu from "../components/mobileMenu/mobileMenu"
 import Search from './../components/search/search'
 import Overview from './../components/overview/overview'
 import ProductLine from './../components/productLine/productLine'
@@ -14,7 +13,7 @@ import ProductLine from './../components/productLine/productLine'
 const TobaccoMainPage = (props) => {
     const [mobileMenuOpen, toggleMobileMenu] = useState(false)
     const [tobaccoBrands, setTobaccoBrands ] = useState<[string]>([''])
-    const  tobaccoBrandsAttributesQuery = useStaticQuery(graphql`
+    const tobaccoBrandsAttributesQuery = useStaticQuery(graphql`
         query  tobaccoMainPageBrandsQuery {
             allWcProductsAttributes(filter: {name: {eq: "TobaccoBrand"}}) {
             nodes {
@@ -27,14 +26,14 @@ const TobaccoMainPage = (props) => {
       }
     `)
 
-    useEffect(() => {  // extract only brand names from query
+    useEffect(() => {  
         let brands: [string] = ['']
+        // extract only brand names from query
         tobaccoBrandsAttributesQuery.allWcProductsAttributes.nodes[0].attribute_options.forEach((attr) => {
             brands.push(attr.name)
         })
         setTobaccoBrands(brands)
     }, [])
-
     return(
         <MainLayout>
             <Header 
@@ -43,27 +42,21 @@ const TobaccoMainPage = (props) => {
                 activeLink = {'табак'}
                 />
             <Search/>
-            <div>
-                <Media 
-                    query="(max-width: 700px)"
-                    render={() => (
-                        <MobileMenu 
-                            isOpen={mobileMenuOpen}
-                            toggleOpen = {toggleMobileMenu}
-                        />
-                    )}
-                    />
-            </div>
+            <MobileMenu 
+                isOpen={mobileMenuOpen}
+                toggleOpen = {toggleMobileMenu}
+            />
             <Overview 
                 brandsList={tobaccoBrands}
                 brandsCategory="tobacco"
                 />
-            {props.pageContext.tobaccosOfEachBrands.map(tobaccosOfBrand => {
+            {props.pageContext.tobaccosOfEachBrands.map((tobaccosOfBrand, index)=> {
                 return (
                     <ProductLine
+                        key={index}
                         header={tobaccosOfBrand.brand}
                         products={tobaccosOfBrand.products}
-                        addCss={"margin-top: 80px;"}
+                        addCss={{marginTop: '80px',}}
                         />
                 )
             })}

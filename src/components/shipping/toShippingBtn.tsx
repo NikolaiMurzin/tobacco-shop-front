@@ -1,7 +1,6 @@
-/** @jsx jsx */
-import { jsx, css } from '@emotion/core'
+import React from 'react'
 import { navigate } from 'gatsby'
-import toShippingBtnImg from './toShippingBtnImg.svg'
+import './toShippingBtn.sass'
 
 const ToShippingBtn = () => {
     let currentPage: string 
@@ -11,19 +10,8 @@ const ToShippingBtn = () => {
     return (
         <div>
         <button
+            className="toShippingBtn"
             onClick={() => {navigate('/shipping', {state: {previusPage: currentPage}})}}
-            css={css`
-                background: url(${toShippingBtnImg}) no-repeat center;
-                background-color: transparent;
-                border: none;
-                width: 45px;
-                height: 45px;
-                cursor: pointer;
-                transition: 0.2s;
-                &:hover{
-                    transform: scale(1.2);
-                }
-            `}
         >
         </button>
         </div>

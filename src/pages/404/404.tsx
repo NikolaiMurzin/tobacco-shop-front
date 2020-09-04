@@ -1,6 +1,6 @@
 import React from "react"
 
-import MainLayout from "../components/mainLayout"
+import MainLayout from "../../components/mainLayout/mainLayout"
 
 const NotFoundPage = () => (
   <MainLayout>

@@ -1,44 +1,33 @@
-/** @jsx jsx */
-import { jsx, css } from '@emotion/core'
+import React from 'react'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import { navigate } from 'gatsby'
+import './productCard.sass'
+import './addProductBtn.sass'
 
 export interface propTypes {
+    id: string,
     imageSrc: string,
     brand: string,
     name: string,
     price: string,
-    weights: [string],
+    weights: string[],
     pathName: string,
+    wordpress_id: string,
 }
 const ProductCard = (props: propTypes) => {
     const { imageSrc, brand, name, price, weights, pathName } = props
     return (
         <div 
-            css={css`
-            &:hover {
-                cursor: pointer
-            }
-        `}>
+            className="productCard"
+        >
                                 <div 
                                     onClick={() => {navigate(pathName)}}
                                 >
-                                    <div css={css`
-                                        display: flex;
-                                        justify-content: left;
-                                        height: 108px;
-                                        width: 107px;
-                                        margin-bottom: 5px;
-                                    `}>
+                                    <div className="productCard__imageWrap">
                                         <LazyLoadImage
+                                            className="productCard__image"
                                             src={imageSrc} 
                                             effect='opacity'
-                                            css={css`
-                                                max-height: 108px;
-                                                max-width: 107px;
-                                                width: auto;
-                                                height: auto;
-                                            `}
                                             wrapperProps={{
                                                 style: {
                                                     display: 'flex',
@@ -48,74 +37,29 @@ const ProductCard = (props: propTypes) => {
                                         />
                                     </div>
                                     <div
-                                        className='montserrat_regular'
-                                        css={css`
-                                            font-size: 14px;
-                                            margin-bottom: 2px;
-                                            color: white;
-                                            max-height: 16px;
-                                            overflow-y: hidden;
-                                        `}
+                                        className='productCard__brand montserrat_regular'
                                     >
                                         {brand}
                                     </div>
                                     <div 
-                                        className='montserrat_regular'
-                                        css={css`
-                                            font-size: 14px;
-                                            margin-bottom: 2px;
-                                            color: white;
-                                            max-height: 16px;
-                                            overflow-y: hidden;
-                                        `}
+                                        className='productCard__name montserrat_regular'
                                     >{name}</div>
-
                                     <div
-                                        className="montserrat_bold" 
-                                        css={css`
-                                            font-size: 14px;
-                                            margin-bottom: 2px;
-                                            color: white;
-                                            max-height: 16px;
-                                            overflow-y: hidden;
-                                        `}
+                                        className="productCard__price montserrat_bold" 
                                     >{price} руб.</div>
-
                                     <div 
-                                        css={css`
-                                            
-                                        `}
-                                    >{weights.map((weight, index) => {
-                                        return <div
-                                                key={index}
-                                                className="montserrat_regular" 
-                                                css={css`
-                                                    font-size: 12px;
-                                                    color: white;
-                                                    max-height: 16px;
-                                                    overflow-y: hidden;
-                                                `}
+                                    >
+                                        {weights? weights.map((weight, index) => {
+                                            return <div
+                                                    key={index}
+                                                    className="productCard__weight montserrat_regular" 
                                         >{weight} гр.</div>
-                                    })}
+                                    }) : <div></div>}
                                     </div>
                                 </div>
                                 <div
+                                    className="addProductBtn"
                                     onClick={() => {console.log('add product clicked')}}
-                                    css={css`
-                                        width: 106px;
-                                        height: 26px;
-                                        background-color: red;
-                                        border-radius: 8px;
-                                        margin-top: 3px;
-                                        text-align: center;
-                                        line-height: 25px;
-                                        font-size: 20px;
-                                        margin-bottom: 25px;
-                                        cursor: pointer;
-                                        &:hover {
-                                            background-color: white;
-                                        }
-                                    `}
                                 >+</div>
         </div>
     )

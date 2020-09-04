@@ -5,8 +5,6 @@
   "version": "0.1.0",
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
-    "@emotion/babel-preset-css-prop": "^10.0.27",
-    "@emotion/core": "^10.0.28",
     "@pasdo501/gatsby-source-woocommerce": "^0.14.1",
     "axios": "^0.19.2",
     "gatsby": "^2.21.22",
@@ -14,22 +12,29 @@
     "gatsby-plugin-manifest": "^2.4.3",
     "gatsby-plugin-offline": "^3.2.1",
     "gatsby-plugin-react-helmet": "^3.3.1",
+    "gatsby-plugin-sass": "^2.3.12",
     "gatsby-plugin-sharp": "^2.6.3",
     "gatsby-source-filesystem": "^2.3.1",
     "gatsby-transformer-sharp": "^2.5.2",
     "js-search": "^2.0.0",
+    "node-sass": "^4.14.1",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-helmet": "^6.0.0",
     "react-indiana-drag-scroll": "^1.6.1",
     "react-lazy-load-image-component": "^1.5.0",
-    "react-media": "^1.10.0"
+    "react-media": "^1.10.0",
+    "react-redux": "^7.2.1",
+    "redux": "^4.0.5"
   },
   "devDependencies": {
+    "@types/node": "^14.6.2",
     "@types/react": "^16.9.35",
     "@types/react-dom": "^16.9.8",
-    "prettier": "2.0.5"
+    "prettier": "2.0.5",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.2"
   },
   "keywords": [
     "gatsby"
@@ -42,7 +47,16 @@
     "start": "npm run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+    "test": "jest --watchAll --passWithNoTests"
+  },
+  "jest": {
+    "watchPathIgnorePatterns": [
+      "<rootDir>/.cache",
+      "<rootDir>/node_modules"
+    ],
+    "testPathIgnorePatterns": [
+      "/.cache/"
+    ]
   },
   "repository": {
     "type": "git",

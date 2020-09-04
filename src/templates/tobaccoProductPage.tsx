@@ -1,19 +1,16 @@
 /** @jsx jsx */
-import Layout from '../components/mainLayout'
+import MainLayout from '../components/mainLayout/mainLayout'
 import { graphql } from "gatsby"
-import { css, jsx } from '@emotion/core'
-import Image from '../components/tobaccoImage'
 
 const ProductPage = (props) => {
     let {data} = props
     let product= data.wcProducts
     return (
-    <Layout>
-        <Image src={product.images[0].src}/>
-        <div css={css`color: white`}>Page of product with data {[product.name, product.id, product.price]}</div>
+    <MainLayout>
+        <div style={{color: 'white'}}>Page of product with data {[product.name, product.id, product.price]}</div>
         
         <div dangerouslySetInnerHTML={{__html: product.short_description}}></div>
-    </Layout>
+    </MainLayout>
     )
 }
 export const query = graphql`

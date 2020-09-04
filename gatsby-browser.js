@@ -1,9 +1,6 @@
-/**
- * Implement Gatsby's Browser APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/browser-apis/
- */
-
-// You can delete this file if you're not using it
 import './src/css/normalize.css'
+import './src/css/fonts/fonts.css'
 import './src/css/bootstrap-grid.min.css'
+import wrapWithProvider from "./wrapWithRedux"
+
+export const wrapRootElement = wrapWithProvider

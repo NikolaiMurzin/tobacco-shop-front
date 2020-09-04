@@ -9,6 +9,7 @@ module.exports = {
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
     'gatsby-plugin-sharp',
+    'gatsby-plugin-sass',
     'gatsby-transformer-sharp',
     {
       resolve: "@pasdo501/gatsby-source-woocommerce",

@@ -1,12 +1,9 @@
-/** @jsx jsx */
-import { css, jsx } from '@emotion/core'
-import { useState, useEffect } from 'react'
-import { useStaticQuery, graphql } from 'gatsby'
+import React from 'react'
+import { useState, } from 'react'
 
-import MainLayout from "../components/mainLayout"
+import MainLayout from "../components/mainLayout/mainLayout"
 import Header from "../components/header/header"
-import Media from "react-media"
-import MobileMenu from "./../components/mobileMenu"
+import MobileMenu from "../components/mobileMenu/mobileMenu"
 import Search from './../components/search/search'
 import Overview from './../components/overview/overview'
 import ProductLine from './../components/productLine/productLine'
@@ -21,27 +18,18 @@ const TobaccosBrandPage= (props) => {
                 activeLink = {'табак'}
                 />
             <Search/>
-            <div>
-                <Media 
-                    query="(max-width: 700px)"
-                    render={() => (
-                        <MobileMenu 
-                            isOpen={mobileMenuOpen}
-                            toggleOpen = {toggleMobileMenu}
-                        />
-                    )}
-                    />
-            </div>
-
+            <MobileMenu 
+                isOpen={mobileMenuOpen}
+                toggleOpen = {toggleMobileMenu}
+            />
             <Overview
                 brandDescription={props.pageContext.brandName}/>
 
             <ProductLine
                 header={"Товары"}
-                products={props.pageContext.tobaccos}
+                products={props.pageContext.products}
                 addCss={"margin-top: 80px;"}
                 />
-
         </MainLayout>
     )
 }

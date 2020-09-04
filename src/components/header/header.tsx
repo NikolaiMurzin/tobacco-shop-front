@@ -1,9 +1,7 @@
-/** @jsx jsx */
-import { jsx, css } from '@emotion/core'
-import Media from "react-media"
-import { Link, withPrefix } from 'gatsby'
-import openMenuBtn from './openMenuBtn.svg'
+import React from 'react'
+import { Link } from 'gatsby'
 import ToShippingBtn from './../shipping/toShippingBtn'
+import './header.sass'
 
 
 export interface propsTypes {
@@ -13,92 +11,47 @@ export interface propsTypes {
 }
 const Header = (props: propsTypes) => {
     const { toggleMobileMenu, mobileMenuOpen } = props
-    const pcMenuLinksStyle = css`
-        font-size: 24px;
-        color: white;
-        text-decoration: none;
-        margin: auto 15px;
-        transition: 0.2s;
-        @media(max-width: 950px) {
-            width: 33%;
-        }
-        &:hover{
-            transform: scale(1.2)
-        };
-    `
 
     return (
         <div 
-            css={css`
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                @media (min-width: 700px) {
-                    padding-top: 88px;
-                }
-                @media (max-width: 700px) {
-                    padding-top: 51px;
-                }
-            `}
+            className="header"
             >
-            <Media 
-                query="(max-width: 699px)"
-                render={() => (
-                    <div>
-                        <button 
-                            onClick={() => { toggleMobileMenu(!mobileMenuOpen)}}
-                            css={css`
-                                background: url(${openMenuBtn}) no-repeat center;
-                                background-color: transparent;
-                                border: none;
-                                height: 45px;
-                                width: 45px;
-                                cursor: pointer;
-                            `}
-                            >
-                        </button>
-                    </div>
-                )}
-                />
+            <div className="header__openMenuBtnWrap">
+                <button 
+                    onClick={() => { toggleMobileMenu(!mobileMenuOpen)}}
+                    className="header__openMenuBtn"
+                    >
+                </button>
+            </div>
             <Link
+                className="header__toHome montserrat_regular"
                 to="/"
-                className="montserrat_regular"
-                css={css`
-                    display: flex;
-                    align-items: center;
-                    text-align: center;
-                    font-size: 24px;
-                    color: white;
-                    cursor: pointer;
-                    text-decoration: none;
-                `}
                 >Kupil & Pokuril</Link>
-            <Media 
-                query="(min-width: 700px)"
-                render={() => (
-                    <div className="montserrat_regular"
-                        css={css`
-                        display: flex;
-                        justify-content: center;
-                        align-content: center;
-                        @media(max-width: 950px) {
-                            flex-wrap: wrap;
-                        }
-                        `}
-                        >
-                        <Link to="/tobacco" 
-                            css={css`
-                                ${pcMenuLinksStyle}
-                                `}
-                            >Табак</Link>
-                        <Link to="/hookah" css={pcMenuLinksStyle}>Кальяны</Link>
-                        <Link to="/flasks" css={pcMenuLinksStyle}>Колбы</Link>
-                        <Link to="/coal" css={pcMenuLinksStyle}>Уголь</Link>
-                        <Link to="/accessories" css={pcMenuLinksStyle}>Акссесуары</Link>
-                        <Link to="/rent" css={pcMenuLinksStyle}>Аренда</Link>
-                    </div>
-                )}
-                />
+                <div 
+                    className="header__navWrap montserrat_regular"
+                    >
+                    <Link 
+                        className="header__navLink"
+                        to="/tobacco" 
+                        >Табак</Link>
+                    <Link 
+                        className="header__navLink"
+                        to="/hookah" 
+                        >Кальяны</Link>
+                    <Link
+                        className="header__navLink" 
+                        to="/flasks">Колбы</Link>
+                    <Link
+                        className="header__navLink" 
+                        to="/coal">Уголь</Link>
+                    <Link 
+                        className="header__navLink"
+                        to="/accessories" 
+                        >Акссесуары</Link>
+                    <Link
+                        className="header__navLink" 
+                        to="/rent">Аренда</Link>
+                </div>
             <ToShippingBtn/>
         </div>
     )

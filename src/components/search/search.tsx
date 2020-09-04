@@ -1,8 +1,8 @@
-/** @jsx jsx */
-import { jsx, css } from '@emotion/core'
+import React from 'react'
 import { useState, useEffect } from 'react'
 import { useStaticQuery, graphql, Link } from 'gatsby'
 import * as JsSearch from 'js-search'
+import './search.sass'
 
 interface product {
     name: string,
@@ -60,7 +60,8 @@ const Search = () => {
         search.addIndex("name") // sets the index attribute for the data
 
         let productList: product[] = productsQuery.allWcProducts.nodes
-        const processedProducts = processProductsForSearch(productList)
+
+        const processedProducts: productForSearch[] = processProductsForSearch(productList)
         search.addDocuments(processedProducts) // adds the data to be searched
         setSearch(search)
     }, [])
@@ -70,61 +71,20 @@ const Search = () => {
         const queryResult = search.search(e.target.value)
         setSearchResult(queryResult)
     }
-
-    return <div css={css`position: relative;`}>
-               
+    return <div className="search">
                 <input
+                    className="search__input montserrat_regular"
                     onChange={searchData}
                     placeholder="поиск"
-                    className="montserrat_regular"
-                    css={css`
-                        width: 100%;
-                        height: 27.13px;
-                        border-radius: 15px;
-                        background-color: #191919;
-                        border: none;
-                        font-size: 16px;
-                        text-align: center;
-                        outline: none;
-                        color: white;
-                        @media(max-width: 700px) {
-                            margin-top: 20px;
-                        }
-                        @media(min-width: 700px) {
-                            margin-top: 12px;
-                        }
-                    `}
                 />
                 <div 
-                    css={css`
-                            position: absolute;
-                            z-index: 1;
-                            top: 65px;
-                            left: 50%;
-                            margin-left: -115px;
-                        `}
+                    className="search__resultsWrap"
                     >{searchResult.map((product) => {
                     return (
                         <Link
+                            className="search__link montserrat_regular"
                             to={'/' + product.pathName}
-                            className="montserrat_regular"
-                            css={css`
-                                display: block;
-                                text-decoration: none;
-                                cursor: pointer;
-                                font-size: 16px;
-                                color: black;
-                                margin: 0 auto 8px auto;
-                                background-color: white;
-                                border-radius: 15px;
-                                max-width: 230px;
-                                padding: 5px;
-                                text-align: center;
-                                transition: 0.1s;
-                                &:hover {
-                                    transform: scale(1.2)
-                                }
-                            `}>
+                            >
                             {product.name}
                         </Link>
                     )

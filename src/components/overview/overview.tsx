@@ -1,8 +1,8 @@
-/** @jsx jsx */
-import { jsx, css } from '@emotion/core'
+import React from 'react'
 import { Link } from 'gatsby'
+import getPathNameOfBrand from './../../../helpers/getPathNameOfBrand'
 import Media from "react-media"
-import './overview.css'
+import './overview.sass'
 
 export interface propsTypes {
     brandsList?: [string],
@@ -13,44 +13,30 @@ export interface propsTypes {
 const Overview = (props: propsTypes) => {
     return  (
        <div className="overview">
-           <div className="overview_imageWrap"
-            >
+
+           <div className="overview__imageWrap">
                 <img 
-                    className="overview_image"
+                    className="overview__image"
                     src="https://kizilov-group-test.ru/wp-content/uploads/2020/07/8-1-1.jpg"
-                        ></img>
+                >
+                </img>
            </div>
+
            <Media 
             query="(min-width: 700px)"
             render={() => {
                     if (props.brandsList) {
                         return (
                             <div
-                                css={css`
-                                    display: flex;
-                                    flex-direction: column;
-                                    justify-content: center;
-                                    overflow-y: auto;
-                                    margin-left: 25px;
-                                `}
+                                className="overview__brandsList"
                             >
-                                {props.brandsList.map((brand) => {
-                                    const getPathNameOfBrand = require('./../../../helpers/getPathNameOfBrand')
+                                {props.brandsList.map((brand, index) => {
                                     const pathName = getPathNameOfBrand(props.brandsCategory, brand)
                                     return (
                                         <Link
+                                            className="overview__brandLink montserrat_regular"
+                                            key={index}
                                             to={pathName}
-                                            className="montserrat_regular"
-                                            css={css`
-                                                font-size: 24px;
-                                                color: #7F93B1;
-                                                cursor: pointer;
-                                                margin-bottom: 12px;
-                                                text-decoration: none;
-                                                &:hover{
-                                                    color: white;
-                                                }
-                                            `}
                                         >{brand}</Link>
                                     )
                                 })}
@@ -58,24 +44,24 @@ const Overview = (props: propsTypes) => {
                         )
                     } else if (props.brandDescription) {
                         return (
-                            <div className="overview_descriptionWrap">
+                            <div className="overview__descriptionWrap">
                                 <div
-                                    className="overview_descriptionHeader montserrat_regular"
+                                    className="overview__descriptionHeader montserrat_regular"
                             >{props.brandDescription}</div>
                                 <div
-                                    className="overview_descriptionText montserrat_regular"
+                                    className="overview__descriptionText montserrat_regular"
                                 >
                                 </div>
                             </div>
                         )
                     } else {
                         return (
-                            <div className="overview_descriptionWrap">
+                            <div className="overview__descriptionWrap">
                                 <div
-                                    className="overview_descriptionHeader montserrat_regular"
+                                    className="overview__descriptionHeader montserrat_regular"
                                 >Оплата и доставка</div>
                                 <div
-                                    className="overview_descriptionText montserrat_regular"
+                                    className="overview__descriptionText montserrat_regular"
                                 >
                                     Эта книга адресована всем, кто изучает русский язык. 
                                     Но состоит она не из правил, упражнений и учебных
